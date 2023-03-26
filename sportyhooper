@@ -1,0 +1,421 @@
+
+local v0 = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))();
+local v1 = v0:CreateWindow({Name="yeat on top fr",LoadingTitle="beyonce has such a fat ass",LoadingSubtitle="beyonce let me fuck",ConfigurationSaving={Enabled=true,FolderName=nil,FileName="Big Hub"},KeySystem=true,KeySettings={Title="pls beyonce let me fuckkk",Subtitle="i lvoe beyonce btw",Note="btw yeat on top",FileName="SiriusKey",SaveKey=true,GrabKeyFromSite=false,Key="BeyonceHasAFatty"}});
+local v2 = v1:CreateTab("HCBB", 4483362458);
+local v3 = v2:CreateButton({Name="Aki Aimbot",Callback=function()
+	local v10 = {AutoAimBat=false,AutoHitBat=true,WindupDist=67,HitDist=14,BallEsp=true,YOffset=-10,OnlyHitInBox=true,AimWithMouse=true,showBoundsAndPrediction=true};
+	local function v11(v12, v13)
+		local v99 = "9271YE7DGWDAHSDBSSS";
+		for v114, v115 in ipairs(getconstants(v12)) do
+			if tostring(v115):find(v13) then
+				return true;
+			end
+		end
+		return false;
+	end
+	local v14 = nil;
+	local v15 = 0;
+	local v16 = Drawing.new("Circle");
+	v16.Visible = true;
+	v16.Thickness = 2;
+	v16.Radius = 10;
+	v16.Color = Color3.new(0, 255, 0);
+	local v21 = Drawing.new("Circle");
+	v21.Visible = true;
+	v21.Thickness = 2;
+	v21.Radius = 30;
+	v21.Color = Color3.new(255, 0, 0);
+	local v26 = Drawing.new("Circle");
+	v26.Visible = true;
+	v26.Thickness = 2;
+	v26.Filled = true;
+	v26.Transparency = 0.5;
+	v26.Radius = 30;
+	v26.Color = Color3.new(255, 0, 0);
+	local v33 = _G.Part or Instance.new("Part");
+	_G.Part = v33;
+	v33.Anchored = true;
+	v33.Size = Vector3.new(0.5, 0.5, 0.5);
+	v33.BrickColor = BrickColor.new("Really red");
+	v33.CanCollide = false;
+	v33.Transparency = (v10.showBoundsAndPrediction and 0.35) or 1;
+	local v39 = {};
+	local v40 = Vector3.new();
+	local v41 = false;
+	local v42 = 0;
+	local v43;
+	v43 = hookmetamethod(game, "__namecall", function(v44, ...)
+		if (not checkcaller() and (getnamecallmethod() == "Clone") and v44 and v44.Parent and (v44.Parent.Name == "Ball")) then
+			if (tick() > (v42 + 2)) then
+				v42 = tick();
+				v14 = v44.Parent;
+			end
+		end
+		return v43(v44, ...);
+	end);
+	local v45 = workspace.CurrentCamera;
+	for v100, v101 in ipairs(getgc(true)) do
+		if ((type(v101) == "function") and islclosure(v101) and not ((syn and is_synapse_function) or (Krnl and iskrnlclosure))(v101)) then
+			if (tostring(getfenv(v101).script) == "GoFirst") then
+				for v165, v166 in pairs(getupvalues(v101)) do
+					if ((type(v166) == "function") and islclosure(v166) and v11(v166, "NextNumber") and (v11(v166, "abs") or v11(v166, "sin"))) then
+						setupvalue(v101, v165, function()
+							return Vector3.new();
+						end);
+					end
+				end
+			end
+		elseif ((type(v101) == "table") and rawget(v101, "GetPos")) then
+			local v148 = v101.SetPitchtab;
+			v101.SetPitchtab = function(v149, v150)
+				delay(0.1, function()
+					if not workspace.Ignore:FindFirstChild("BGUI") then
+						return;
+					end
+					local v168 = workspace.Ignore.BGUI.BlackBoarder;
+					local v169 = math.huge;
+					local v170 = Vector3.new();
+					for v179 = 0, 1, 0.01 do
+						local v180 = v101:GetPos(v179, v39, false, nil, v150);
+						if (v180 and (v180.p ~= Vector3.new(0, 0, 0))) then
+							local v197 = (v180.p - v168.Position).Magnitude;
+							if (v197 < v169) then
+								v169 = v197;
+								v170 = v180.p;
+							end
+						end
+					end
+					if (v170 ~= Vector3.new()) then
+						v21.Visible = v10.showBoundsAndPrediction;
+						v26.Visible = v10.showBoundsAndPrediction;
+						local v191, v192 = workspace.CurrentCamera:WorldToViewportPoint(v170);
+						v21.Position = Vector2.new(v191.x, v191.y);
+						v26.Position = Vector2.new(v191.x, v191.y);
+						v40 = v170;
+					else
+						v21.Visible = false;
+						v26.Visible = false;
+					end
+				end);
+				return v148(v149, v150);
+			end;
+		end
+	end
+	game.ReplicatedStorage.RESC.SEVREPBALLTHROW.OnClientEvent:connect(function(v46, v47)
+		v39 = v47;
+	end);
+	local v48 = game:GetService("Players").LocalPlayer:GetMouse();
+	local v49 = 1;
+	local v50 = nil;
+	local v51 = false;
+	local v52 = false;
+	local v53 = false;
+	local v54;
+	local v55;
+	actuallyAim = function()
+		if ((v14 ~= nil) and (v14.Parent ~= nil)) then
+			local v123 = v14.Position;
+			if (v40 and (v40 ~= Vector3.new())) then
+				v123 = v40;
+			end
+			local v124 = v45:WorldToScreenPoint(v123 + Vector3.new(0, -v14.Size.Y / 2, 0));
+			local v125 = v45:WorldToScreenPoint(v48.Hit.p);
+			local v126 = Vector2.new();
+			local v127 = Vector2.new(v124.X, v124.Y);
+			local v128;
+			if v50 then
+				local v152 = v45:WorldToScreenPoint(v50.Position + Vector3.new(0, v50.Size.Y / 2, 0));
+				local v153 = Vector2.new(v125.X, v125.Y);
+				local v154 = Vector2.new(v152.X, v152.Y);
+				local v155 = v153 - v154;
+				v127 = v127 + v155 + Vector2.new(0, v10.YOffset);
+				v128 = v155;
+			end
+			v126 = v127;
+			local v129 = false;
+			if v10.AutoHitBat then
+				local v156 = workspace.Plates.SwingTarget.Position;
+				if (v40 and (v40 ~= Vector3.new())) then
+					v156 = v40;
+				end
+				local v157 = (v14.Position - v156).Magnitude;
+				if ((v157 <= v10.WindupDist) and not v51) then
+					v51 = true;
+					mouse1click();
+				end
+				if (v51 and not v52) then
+					local v171 = workspace.Ignore.BGUI.BlackBoarder;
+					local v172 = v45:WorldToScreenPoint(v123);
+					local v173 = {TopLeft=v45:WorldToScreenPoint(v171.Position + Vector3.new(0, (v171.Size.Y / 2) + 0.2 + 0.25, (v171.Size.X / 2) + 0.2 + 0.25)),TopRight=v45:WorldToScreenPoint(v171.Position + Vector3.new(0, (v171.Size.Y / 2) + 0.2 + 0.25, ((-v171.Size.X / 2) - 0.2) - 0.25)),BottomRight=v45:WorldToScreenPoint(v171.Position + Vector3.new(0, ((-v171.Size.Y / 2) - 0.2) - 0.25, ((-v171.Size.X / 2) - 0.2) - 0.25)),BottomLeft=v45:WorldToScreenPoint(v171.Position + Vector3.new(0, ((-v171.Size.Y / 2) - 0.2) - 0.25, (v171.Size.X / 2) + 0.2 + 0.25))};
+					local v174 = _G.parts or {TopLeft=Instance.new("Part"),TopRight=Instance.new("Part"),BottomLeft=Instance.new("Part"),BottomRight=Instance.new("Part")};
+					_G.parts = v174;
+					for v181, v182 in pairs(v174) do
+						v182.Anchored = true;
+						v182.CanCollide = false;
+						v182.BrickColor = BrickColor.new("Cyan");
+						v182.Size = Vector3.new(0.25, 0.25, 0.25);
+						v182.Transparency = (v10.showBoundsAndPrediction and 0.1) or 1;
+					end
+					if v10.showBoundsAndPrediction then
+						_G.Part.Transparency = 0.35;
+					else
+						_G.Part.Transparency = 1;
+					end
+					v174.TopLeft.Position = v171.Position + Vector3.new(0, (v171.Size.Y / 2) + 0.2 + 0.25, (v171.Size.X / 2) + 0.2 + 0.25);
+					v174.TopRight.Position = v171.Position + Vector3.new(0, (v171.Size.Y / 2) + 0.2 + 0.25, ((-v171.Size.X / 2) - 0.2) - 0.25);
+					v174.BottomRight.Position = v171.Position + Vector3.new(0, (-v171.Size.Y / 2) - 0.2, ((-v171.Size.X / 2) - 0.2) - 0.25);
+					v174.BottomLeft.Position = v171.Position + Vector3.new(0, (-v171.Size.Y / 2) - 0.2, (v171.Size.X / 2) + 0.2 + 0.25);
+					if (not v10.OnlyHitInBox or ((v172.X <= v173.TopRight.X) and (v172.X >= v173.TopLeft.X) and (v172.Y <= v173.BottomRight.Y) and (v172.Y >= v173.TopRight.Y))) then
+						v129 = true;
+						if (v157 <= v10.HitDist) then
+							mouse1click();
+						end
+					end
+					v52 = true;
+					delay(2, function()
+						v52 = false;
+						v51 = false;
+						v14 = nil;
+					end);
+				end
+			end
+			if (v10.AimWithMouse and not v53 and v14) then
+				v53 = true;
+				local v158 = Instance.new("CFrameValue");
+				v158.Value = CFrame.new(v125.X, v125.Y, 0);
+				local v160 = true;
+				if (v15 ~= 0) then
+					v54 = game:GetService("TweenService"):Create(v158, TweenInfo.new(v15, Enum.EasingStyle.Quad), {Value=CFrame.new(v126.X, v126.Y, 0)});
+					v54:Play();
+					v55 = v54.Completed:Connect(function()
+						v160 = false;
+						delay(2, function()
+							v53 = false;
+						end);
+					end);
+					v14.Changed:Connect(function()
+						if (v14 and v14.Parent) then
+							v54:Pause();
+							local v198 = v14.Position;
+							if (v40 and (v40 ~= Vector3.new())) then
+								v198 = v40;
+							end
+							local v199 = v45:WorldToScreenPoint(v198 + Vector3.new(0, -v14.Size.Y / 2, 0));
+							local v200 = v45:WorldToScreenPoint(v48.Hit.p);
+							local v201 = Vector2.new();
+							local v202 = Vector2.new(v199.X, v199.Y);
+							local v203;
+							if v50 then
+								local v205 = v45:WorldToScreenPoint(v50.Position + Vector3.new(0, v50.Size.Y / 2, 0));
+								local v206 = Vector2.new(v200.X, v200.Y);
+								local v207 = Vector2.new(v205.X, v205.Y);
+								local v208 = v206 - v207;
+								v202 = v202 + v208 + Vector2.new(0, v10.YOffset);
+								v203 = v208;
+							end
+							v201 = v202;
+							v54 = game:GetService("TweenService"):Create(v158, TweenInfo.new(v15, Enum.EasingStyle.Quad), {Value=CFrame.new(v201.X, v201.Y, 0)});
+							v54:Play();
+							v55:Disconnect();
+							v55 = v54.Completed:Connect(function()
+								v160 = false;
+								delay(2, function()
+									v53 = false;
+								end);
+							end);
+						end
+					end);
+					spawn(function()
+						while v160 do
+							task.wait();
+							mousemoveabs(v158.Value.X, v158.Value.Y);
+						end
+					end);
+				else
+					v53 = false;
+					mousemoveabs(v126.X, v126.Y);
+					mousemoverel(1, 1);
+				end
+			end
+		end
+	end;
+	local v56 = {};
+	for v102, v103 in ipairs(getgc(true)) do
+		if ((type(v103) == "table") and rawget(v103, "CENT_VECTOR2_1")) then
+			v56 = v103;
+		end
+	end
+	local v57, v58 = game.Players.LocalPlayer:GetMouse();
+	v58 = hookmetamethod(v57, "__index", newcclosure(function(v44, v59)
+		if (not checkcaller() and (v59 == "X") and v14) then
+			local v130 = v45:WorldToScreenPoint(v14.Position);
+			local v131 = rawget(v56, "CENT_VECTOR2_1");
+			if (v131 and v10.AutoAimBat) then
+				return v130.X - v131.X;
+			end
+		end
+		if (not checkcaller() and (v59 == "Y") and v14) then
+			local v132 = v45:WorldToScreenPoint(v14.Position);
+			local v133 = rawget(v56, "CENT_VECTOR2_1");
+			if (v133 and v10.AutoAimBat) then
+				return v132.Y - v133.Y;
+			end
+		end
+		return v58(v44, v59);
+	end));
+	local function v60(v44)
+		if ((v44.ClassName == "Part") and (v44.Name ~= "Shad") and (v44.Name ~= "Self") and (v44.Name ~= "HitTracker")) then
+			v44:GetPropertyChangedSignal("CFrame"):Connect(function()
+				v50 = v44;
+			end);
+		end
+	end
+	for v104, v105 in ipairs(workspace.Ignore:GetChildren()) do
+		v60(v105);
+	end
+	workspace.Ignore.ChildAdded:Connect(v60);
+	game:GetService("RunService").Heartbeat:connect(function()
+		if ((v14 == nil) or (v14.Parent == nil)) then
+			v16.Visible = false;
+		else
+			actuallyAim();
+			v16.Visible = v10.BallEsp;
+			local v137, v138 = workspace.CurrentCamera:WorldToViewportPoint(v14.Position);
+			v16.Position = Vector2.new(v137.x, v137.y);
+		end
+	end);
+end});
+local v4 = v2:CreateButton({Name="Speed",Callback=function()
+	local v61 = game:GetService("RunService");
+	local v62 = game:GetService("Players").LocalPlayer;
+	local v63 = v62.Character and v62.Character:FindFirstChild("HumanoidRootPart");
+	local v64 = v62.Character and v62.Character:FindFirstChild("Humanoid");
+	local v66 = v62.CharacterAdded:Connect(function(v65)
+		v63 = v65:WaitForChild("HumanoidRootPart", 3);
+		v64 = v65:WaitForChild("Humanoid", 3);
+	end);
+	local function v67(v68)
+		local v106 = {};
+		for v116, v117 in ipairs(getconnections(v68)) do
+			local v118 = v117.Function;
+			if (v118 and islclosure(v118)) then
+				if not is_synapse_function(v118) then
+					v106[#v106 + 1] = v117;
+					v117:Disable();
+				end
+			end
+		end
+		return v106;
+	end
+	local v69 = 5;
+	local v70 = loadstring(game:HttpGet("https://raw.githubusercontent.com/topitbopit/rblx/main/ui-stuff/jeff_2.lua"))();
+	v70:SetColors("streamline");
+	local v71 = v70:NewWindow("universal speed", 250, 200);
+	local v72 = v71:NewMenu("speed");
+	local v73 = v72:NewToggle("toggle speed");
+	local v74 = v72:NewSlider("fast slider lololol", 1, 50, 5);
+	v73:SetTooltip("toggle the fastness");
+	v74:SetTooltip("the fast number lol");
+	v72:NewLabel();
+	v72:NewLabel("by nerfed enjoy");
+	v74.OnValueChanged:Connect(function(v75)
+		v69 = v75;
+	end);
+	do
+		local v107, v108;
+		v73.OnToggle:Connect(function(v109)
+			if v109 then
+				v107 = v67(v63.Changed);
+				v108 = v67(v63:GetPropertyChangedSignal("CFrame"));
+				v61:BindToRenderStep("speed", 2000, function(v144)
+					v63.CFrame += (v64.MoveDirection * v144 * 5 * v69)
+				end);
+			else
+				v61:UnbindFromRenderStep("speed");
+				for v161, v162 in ipairs(v107) do
+					v162:Enable();
+				end
+				for v163, v164 in ipairs(v108) do
+					v164:Enable();
+				end
+			end
+		end);
+	end
+	v70.Exiting:Connect(function()
+		for v119, v120 in ipairs(v70:GetAllToggles()) do
+			if (v120:IsEnabled()) then
+				v120:Disable();
+			end
+		end
+		v66:Disconnect();
+	end);
+	v70:Ready();
+end});
+local v5 = v1:CreateTab("Phenom", 4483362458);
+local v6 = v5:CreateButton({Name="Loompic",Callback=function()
+	hookfunction(game:GetService("Players").LocalPlayer.IsInGroup, function()
+		return true;
+	end);
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Loompic/Phenom-Aimbot/main/Bot"))();
+end});
+local v7 = v5:CreateButton({Name="Nerf's Phenom Hub",Callback=function()
+	local v76 = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3"))();
+	local v77 = v76:CreateWindow("nerfs hub");
+	local v78 = v77:CreateFolder("Main");
+	v78:Button("Aimbot", function()
+		hookfunction(game:GetService("Players").LocalPlayer.IsInGroup, function()
+			return true;
+		end);
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Loompic/Phenom-Aimbot/main/Bot"))();
+	end);
+	v78:Toggle("Ball Mag", function(v79)
+		getgenv().ballMag = v79;
+		local v111 = game:GetService("RunService");
+		v111.RenderStepped:Connect(function()
+			if (ballMag == true) then
+				game.Workspace.Map.Basketball.Handle.CFrame = Game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame;
+			end
+		end);
+	end);
+	v78:Toggle("Long Arm", function(v79)
+		getgenv().longArm = v79;
+		if (longArm == true) then
+			game:GetService("Players").LocalPlayer.Character["Left Arm"].Size = Vector3.new(15, 1, 1);
+			game:GetService("Players").LocalPlayer.Character["Right Arm"].Size = Vector3.new(15, 1, 1);
+		else
+			game:GetService("Players").LocalPlayer.Character["Left Arm"].Size = Vector3.new(1, 2, 1);
+			game:GetService("Players").LocalPlayer.Character["Right Arm"].Size = Vector3.new(1, 2, 1);
+		end
+	end);
+	v78:Button("No Press", function()
+		for v121, v122 in pairs(game:GetService("Workspace").Stadium:GetChildren()) do
+			if ((v122:IsA("Part") and v122:FindFirstChild("BluePress")) or v122:FindFirstChild("RedPress")) then
+				v122:Destroy();
+			end
+		end
+	end);
+end});
+local v8 = v1:CreateTab("Football Fusion", 4483362458);
+local v9 = v8:CreateButton({Name="FF2 Hub",Callback=function()
+	getgenv().Variables = {};
+	Variables.Players = game:GetService("Players");
+	Variables.ReplicatedStorage = game:GetService("ReplicatedStorage");
+	Variables.UserInputService = game:GetService("UserInputService");
+	Variables.Client = Variables.Players.LocalPlayer;
+	Variables.Character = Variables.Client.Character or Variables.Client.CharacterAdded:Wait();
+	Variables.Client.CharacterAdded:Connect(function(v87)
+		Variables.Character = v87;
+	end);
+	Variables.Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/ui.lua"))();
+	Variables.Window = Variables.Library:AddWindow({title={"nerfed's ff2 hub","use an alt pls"},default=true,theme={Accent=Color3.fromRGB(255, 0, 255),TopbarColor=Color3.fromRGB(10, 10, 10),SidebarColor=Color3.fromRGB(10, 0, 30),BackgroundColor=Color3.fromRGB(10, 10, 10),SectionColor=Color3.fromRGB(0, 0, 10),TextColor=Color3.fromRGB(300, 15, 300),Objects={}}});
+	Variables.Physics = Variables.Window:AddTab("enjoy the script homies");
+	Variables.CatchingTab = Variables.Window:AddTab("Catching");
+	Variables.Physics = Variables.Window:AddTab("Physics");
+	Variables.Kicking = Variables.Window:AddTab("Kicking");
+	Variables.Mags = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Catching/Mags.lua"))();
+	Variables.Grapher = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Catching/Grapher.lua"))();
+	Variables.Aimbot = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Kicking/Aimbot.lua"))();
+	Variables.Boost = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Physics/Boost.lua"))();
+	Variables.DynamicJump = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Physics/DynamicJump.lua"))();
+	Variables.Tracer = loadstring(game:HttpGet("https://raw.githubusercontent.com/yoo123fd/f/master/Modules/Catching/Tracer.lua"))();
+end});
